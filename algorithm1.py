@@ -49,8 +49,8 @@ isEvent = pandas.Series(selector)
 
 df_event = df_train[isEvent].head(61)
 
-for tweet in df_event['tweetText']:
-    print(tweet)
+#for tweet in df_event['tweetText']:
+#    print(tweet)
 
 
 langs = dict()
@@ -189,15 +189,15 @@ ft_test = df_test.tweetText
 
 
 #Init Bag-of-Words
-count_vectoriser = CountVectorizer(stop_words='english')
-count_train = count_vectoriser.fit_transform(ft_train)
-count_test = count_vectoriser.transform(ft_test)
+#count_vectoriser = CountVectorizer(stop_words='english')
+#count_train = count_vectoriser.fit_transform(ft_train)
+#count_test = count_vectoriser.transform(ft_test)
 
 
 #Init N-Gram
-ngram_vectoriser = CountVectorizer(analyzer='char_wb', ngram_range=(2, 2))
-ngram_train = ngram_vectoriser.fit_transform(ft_train)
-ngram_test = ngram_vectoriser.transform(ft_test)
+#ngram_vectoriser = CountVectorizer(analyzer='char_wb', ngram_range=(2, 2))
+#ngram_train = ngram_vectoriser.fit_transform(ft_train)
+#ngram_test = ngram_vectoriser.transform(ft_test)
 
 
 #Init TF-IDF
@@ -212,34 +212,34 @@ tfidf_test = tfidf_vectoriser.transform(ft_test)
 
 
 # Multinomial Naive Bayes Classification
-clf = MultinomialNB()
+#clf = MultinomialNB()
 
 # Bernoulli Naive Bayes Classification
-clf = BernoulliNB()
+#clf = BernoulliNB()
 
 # Passive Aggressive Classification
-clf = PassiveAggressiveClassifier()
+#clf = PassiveAggressiveClassifier()
 
 # Stochastic Gradient Descent Classification
 clf = SGDClassifier()
 
 
 #Bag-of-Words
-clf.fit(count_train, tar_train)
+#clf.fit(count_train, tar_train)
 
-pred = clf.predict(count_test)
-score = metrics.accuracy_score(tar_test, pred)
+#pred = clf.predict(count_test)
+#score = metrics.accuracy_score(tar_test, pred)
 
-print("accuracy:   %0.3f" % score)
+#print("accuracy:   %0.3f" % score)
 
 
 #N-Grams
-clf.fit(ngram_train, tar_train)
+#clf.fit(ngram_train, tar_train)
 
-pred = clf.predict(ngram_test)
-score = metrics.accuracy_score(tar_test, pred)
+#pred = clf.predict(ngram_test)
+#score = metrics.accuracy_score(tar_test, pred)
 
-print("accuracy:   %0.3f" % score)
+#print("accuracy:   %0.3f" % score)
 
 
 #TF-IDF
@@ -250,6 +250,6 @@ score = metrics.accuracy_score(tar_test, pred)
 
 print("accuracy:   %0.3f" % score)
 
-f1Score = metrics.f1_score(tar_test, pred, average='macro')
+f1Score = metrics.f1_score(tar_test, pred, pos_label="real")
 
 print("F1 Score is: ", f1Score)
